@@ -18,51 +18,110 @@ Another Python library used in this project is the Password Validator. It is cap
 The purpose of strict password composition policies is to improve password security; however, they cannot guarantee that user-generated passwords will be difficult to crack. Users may still create passwords that meet the password composition policy requirements but are predictable, such as by using common words and dates or patterns (Guo et al., 2019). Therefore, to overcome these vulnerabilities, it is crucial to implement multiple layers of security measures.
 
 ## code decomposition
-### Installing libraries:
-Libraries such as pyotp and password_validator need to be installed for the application to run.
-
-<span class="image fit"><img src="images/install_libraries.PNG" alt="" /></span>
-
 ### Importing libraries:
 These imports include necessary libraries for database management, audio recording, encryption, and general operations.
 
-<span class="image fit"><img src="images/lib.PNG" alt="" /></span>
+<span class="image fit"><img src="images/import.PNG" alt="" /></span>
 
 ### Encryption Functions:
 Generate Encryption Key:
 This function generates a new encryption key using Fernet.
-<span class="image fit"><img src="images/libv.png" alt="" /></span>
+<span class="image fit"><img src="images/SSEkey.png" alt="" /></span>
 
 Save Encryption Key:
 This function saves the generated key to a file.
-<span class="image fit"><img src="images/libv.png" alt="" /></span>
+<span class="image fit"><img src="images/SEkey.png" alt="" /></span>
 
 Load Encryption Key:
 This function loads the encryption key from a file.
-<span class="image fit"><img src="images/libv.png" alt="" /></span>
+<span class="image fit"><img src="images/LEkey.png" alt="" /></span>
 
 Encrypt Message:
 This function encrypts a message using the given key.
-<span class="image fit"><img src="images/libv.png" alt="" /></span>
+<span class="image fit"><img src="images/Emes.png" alt="" /></span>
 
 Decrypt Message:
 This function decrypts an encrypted message using the given key.
-<span class="image fit"><img src="images/libv.png" alt="" /></span>
+<span class="image fit"><img src="images/Dmes.png" alt="" /></span>
 
-### Registration function and Password validation definiation:
-The Register function in the program prompts the user to input a username and password, validates the password complexity requirements using the password_validator library, and stores the username and password in pass.txt if the password meets the requirements.
+### Key Management:
+Check if Key Exists:
+This part checks if the encryption key file exists. If not, it generates a new key and saves it; otherwise, it loads the existing key.
 
-<span class="image fit"><img src="images/regf.png" alt="" /></span>
+<span class="image fit"><img src="images/key.png" alt="" /></span>
 
-### Login function:
-The Login function in the program prompts the user to input their username and password, compares it to the information stored in a pass.txt, and grants access if the information matches or denies access if it does not match.
+### Database Setup:
+Setup Database:
+This function sets up the SQLite database with users and recordings tables.
 
- <span class="image fit"><img src="images/lfun.png" alt="" /></span>
+ <span class="image fit"><img src="images/DBset.png" alt="" /></span>
 
-### Main program body and OTP definition:
-The program asks the user to choose between signing up for a new account or logging into an existing account by prompting them to enter either "signup" or "login", it also contains OTP verification to ensure secure user authentication during login.
+### User Registration:
+Register User:
+This function registers a new user by prompting for a username and password, encrypting the password, and saving the details to the database.
 
-<span class="image fit"><img src="images/motp.png" alt="" /></span>
+<span class="image fit"><img src="images/reg.png" alt="" /></span>
+
+Post Register Actions:
+This function handles actions immediately after user registration, such as recording audio or logging out.
+
+<span class="image fit"><img src="images/PostReg.png" alt="" /></span>
+
+### User Login:
+Login User:
+This function handles user login by verifying the username and password. If the admin credentials are used, it returns 'admin'.
+
+<span class="image fit"><img src="images/loginuser.png" alt="" /></span>
+
+### Viewing Recordings:
+View User's Recordings:
+This function retrieves and displays a user's recordings from the database.
+
+<span class="image fit"><img src="images/viewallrecording1.png" alt="" /></span>
+
+View All Recordings(Admin):
+This function allows the admin to view all recordings from all users.
+
+<span class="image fit"><img src="images/viewallrecording.png" alt="" /></span>
+
+### Managing Recordings:
+Delete Recording (Admin):
+This function allows the admin to delete a recording by its ID.
+
+<span class="image fit"><img src="images/Deleterecording.png" alt="" /></span>
+
+Record Audio:
+This function handles audio recording and saves the recorded audio to a file.
+
+<span class="image fit"><img src="images/recordaudio.png" alt="" /></span>
+
+Save Recording Metadata:
+This function saves recording metadata (user ID, filename, and rating) to the database.
+
+<span class="image fit"><img src="images/metadata.png" alt="" /></span>
+
+Record and Save:
+This function handles the entire process of recording audio, encrypting the filename, and saving it to the database.
+
+<span class="image fit"><img src="images/recordandsave.png" alt="" /></span>
+
+### User and Admin Menus:
+User Menu:
+This function displays the user menu with options to view recordings, record new audio, or log out.
+
+<span class="image fit"><img src="images/usermenu.png" alt="" /></span>
+
+### Main Function:
+Main Function:
+This is the main function that starts the application. It sets up the database and provides initial options to register or log in.
+
+<span class="image fit"><img src="images/mainf1.png" alt="" /></span>
+
+Run Main Function:
+This ensures that the main() function is called when the script is run directly.
+
+<span class="image fit"><img src="images/runmainf.png" alt="" /></span>
+
 
 ## program video demonstration 
 
