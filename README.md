@@ -125,7 +125,7 @@ This ensures that the main() function is called when the script is run directly.
 
 ## program video demonstration 
 
-<img src="images/video.gif">
+<img src="images/Digital.gif">
 
 ## usage
 
