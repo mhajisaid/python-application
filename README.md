@@ -4,18 +4,61 @@
 
 ## Introduction:
 
-This project addresses copyright infringement concerns in the music industry, focusing on preventing unauthorised copying of user recordings. The application employs robust authentication mechanisms, role-based access control, and encryption techniques to safeguard recordings. User authentication ensures that only registered users and admins can access the system, with admins having broader management capabilities. Role-based access control restricts regular users from viewing or managing other users' recordings, while admins can oversee all recordings. Encryption of filenames and passwords provides an additional layer of security, ensuring data remains protected even if the database is compromised. These measures collectively prevent unauthorised access and copying, effectively mitigating copyright infringement risks. By securing user data and controlling access, the application ensures that recordings remain accessible only to their rightful owners and authorised personnel.
+This project addresses copyright infringement concerns in the music industry, focusing on preventing unauthorised copying of user recordings. To achieve this, the application integrates advanced authentication mechanisms, role-based access control and sophisticated encryption techniques to safeguard recordings. User authentication guarantees that only registered users and administrators can access the system, with administrators having enhanced management capabilities. Another method utilised is Role-based access control. Role-Based Access Control (RBAC) is a model in which access permission for controlled content is assigned to a group who have the same role, rather than individuals (Blundo et al., 2020). For instance, this would limit regular users from viewing or managing others' recordings, while administrators maintain oversight of all recordings. 
+Additionally, the encryption of filenames and passwords introduces an essential layer of security, ensuring that sensitive data remains protected even if the database is compromised. As explained by Shukla et al. (2022), this encryption process transforms filenames and passwords into unreadable formats; this makes it difficult for individuals who do not have authorisation to access the information. Therefore, in the event of a security breach, the encrypted data remains secure, which significantly enhances the overall resilience of the system against potential attacks and threats (Shukla et al., 2022).
+These measures are highly effective in preventing unauthorised access and copying, thus, significantly reducing the risk of copyright infringement. Safeguarding user data and implementing access controls guarantees that recordings remain accessible exclusively to their owners and authorised personnel. The main functionalities of the application are detailed below:
 
 ## Secure Database:
 
-To overcome the main issues associated with relying on passwords and to ensure authentication and authorisation, the method of two-factor authentication was developed. This approach involves using two distinct components, commonly referred to as factors, namely the login credentials such as the username and password as well as a One Time Password, a dynamic code that can be obtained by the user usually via SMS (Andrews, 2018). Thus, once the user logs into the system using their username and password, they are sent a One Time Password to authenticate them and authorise them access to their account. OTP operates on the principle that every user's account is connected to a mobile phone and ideally only the user should receive SMS messages sent to the phone number associated with their account (Mulliner et al., 2013). 
-Therefore, as devices are physically owned by individuals and associated with a specific account, this makes OTP an integral component of a multi-factor authentication (Reese et al., 2019). However, as studies have highlighted there several criticisms of OTP. This includes an attacker acquiring the OTP through physical access to the phone, a SIM swap attack, or wireless interception (Mulliner et al., 2013). In all these instances a cybercriminal could gain access to the OTP and authorisation into the user’s account. Thus, it is important to implement multiple layers of security measures as OTP can have limitations. 
-This project uses PyOTP, a Python library for generating and authenticating one-time passwords. It is capable of implementing two-factor (2FA) or multi-factor (MFA) authentication methods in web applications and other systems that need users to log in. A time-based restriction element is also utilised to ensure the OTP times out if it is not used promptly. 
+The application uses encryption to protect the filenames of recordings stored in the database, ensuring that only authorised users can access and understand the data. Here is a detailed breakdown of how this encryption helps in preventing copyright infringement:
+
+
+Storage of Encrypted Filenames:	
+Before a recording is saved and stored in the database, its filename is encrypted. This means that in case an individual gains unauthorised access to the database, they would not be able to determine the names of the files, before they can even access the recordings themselves.
+
+Retrieval of Encrypted Filenames:	
+When a user views their recordings, the application decrypts the filenames before displaying them. This ensures that the data remains secure during storage and transit while remaining accessible in a readable format to the rightful owner.
+Generation and Storage of Encryption Keys:	
+A secure encryption key is generated and stored in a file when the application is first run. This key is essential for both encrypting and decrypting the filenames. The key management process ensures that the encryption is robust and that the key is not easily accessible.
+
+Loading the Encryption Key:	
+Every time the application runs, it checks for the existence of the key file. If the file exists, the key is loaded for use in encryption and decryption operations, ensuring consistency and security across sessions.
+
+Encrypting Messages:	
+The encrypt_message function uses the encryption key to securely encrypt the filenames. This makes the filenames unreadable to anyone who does not have access to the key.
+
+Decrypting Messages:	
+Conversely, the decrypt_message function decrypts the filenames when they need to be accessed by authorised users. This ensures that only legitimate users can view and manage the recordings.
+
+
 
 
 ## Controlled Access:
-Another Python library used in this project is the Password Validator. It is capable of validating passwords based on meting a set criteria. As described by Wang and Wang (2015), password composition policies are a set of guidelines that organisations use to help users create strong passwords. These policies outline the specifications for creating an acceptable password, including the minimum character length, for example, including at least eight characters, symbols, numbers, uppercase and lowercase letters). Password validation aims to address the issue of weak passwords and ensure users create stronger passwords. 
-The purpose of strict password composition policies is to improve password security; however, they cannot guarantee that user-generated passwords will be difficult to crack. Users may still create passwords that meet the password composition policy requirements but are predictable, such as by using common words and dates or patterns (Guo et al., 2019). Therefore, to overcome these vulnerabilities, it is crucial to implement multiple layers of security measures.
+The application prevents copyright infringement through controlled access by implementing several security measures, including user authentication, role-based access control and encryption. The following steps outline how these mechanisms work together to ensure that only authorised users can access or manage recordings:
+
+User Registration:
+During registration, users create a unique username and password. The password is encrypted before being stored in the database, ensuring it remains secure.
+
+User and Admin Roles:
+The application distinguishes between regular users and the admin. Regular users can only see and manage their own recordings, while the admin has broader access for oversight. This role-based access control, combined with encrypted filenames, ensures that data is not exposed inappropriately.
+
+User Login:
+Users must provide their username and password to log in. The application decrypts the stored password and compares it with the entered password to authenticate the user.
+
+Admin and User Roles:
+The application differentiates between regular users and the admin. The admin has broader access and control over the system, while regular users can only access their own recordings.
+
+Admin Access:
+The admin can view all recordings, delete recordings, and perform other administrative tasks.
+
+User Access:
+Regular users can view and manage only their recordings. This access is restricted to ensure that users cannot view or modify other users' recordings.
+
+Viewing Recordings:
+Users can view only their recordings, ensuring that they do not have access to recordings made by other users.
+
+Admin Management:
+The admin can view and delete any recordings, providing oversight and control over the entire database.
 
 ## code decomposition
 ### Importing libraries:
@@ -161,10 +204,5 @@ This ensures that the main() function is called when the script is run directly.
 
 ## References: 
 
-* Andrews, N., 2018. Can I Get Your Digits: Illegal Acquisition of Wireless Phone Numbers for Sim-Swap Attacks and Wireless Provider Liability. Nw. J. Tech. & Intell. Prop., 16, 79.
-* Guo, Y., Zhang, Z. and Guo, Y., 2019. Optiwords: A new password policy for creating memorable and strong passwords. Computers & Security, 85, pp.423-435.
-* Mulliner, C., Borgaonkar, R., Stewin, P. and Seifert, J.P., 2013. SMS-Based One-Time Passwords: Attacks and Defense: (Short Paper). In Detection of Intrusions and Malware, and Vulnerability Assessment: 10th International Conference, DIMVA 2013, Berlin, Germany, July 18-19, 2013. Proceedings 10 (pp. 150-159). Springer Berlin Heidelberg.
-* Reese, K., Smith, T., Dutson, J., Armknecht, J., Cameron, J. and Seamons, K., 2019, July. A usability study of five two-factor authentication methods. In Proceedings of the Fifteenth Symposium on Usable Privacy and Security.
-* Shostack, A., 2014. Threat modeling: Designing for security. John Wiley & Sons.
-* Wang, D. and Wang, P., 2015. The emperor’s new password creation policies: An evaluation of leading web services and the effect of role in resisting against online guessing. In Computer Security--ESORICS 2015: 20th European Symposium on Research in Computer Security, Vienna, Austria, September 21-25, 2015, Proceedings, Part II 20 (pp. 456-477). Springer International Publishing.
-
+* Blundo, C., Cimato, S., & Siniscalchi, L. (2020). Managing constraints in role based access control. IEEE Access, 8, 140497-140511.
+* Shukla, S., George, J. P., Tiwari, K., & Kureethara, J. V. (2022). Data security. In Data Ethics and Challenges (pp. 41-59). Singapore: Springer Singapore.
