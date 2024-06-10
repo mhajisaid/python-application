@@ -64,7 +64,7 @@ The admin can view and delete any recordings, providing oversight and control ov
 ### Importing libraries:
 These imports include necessary libraries for database management, audio recording, encryption, and general operations.
 
-<span class="image fit"><img src="images/import.PNG" alt="" /></span>
+<span class="image fit"><img src="images/import.png" alt="" /></span>
 
 ### Encryption Functions:
 Generate Encryption Key:
